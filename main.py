@@ -10,6 +10,7 @@ def main():
 
     return
 
+
 def file_setup(file):
 
     df = pd.read_csv(file)
@@ -47,6 +48,11 @@ def bet_amounts(df):
     plt.tight_layout()  # Adjust layout to make room for label rotation
     plt.show()
 
+    return
+
+
+def player_list():
+    """extracts player names"""
     return
 
 if __name__ == "__main__": main()
