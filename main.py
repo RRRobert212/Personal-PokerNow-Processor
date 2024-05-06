@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 def main():
 
     data = file_setup("Poker_Logs/23_4_13_poker_now_log_pglbk0n0A4kl6CO8XF0IxloCX.csv")
-    bet_amounts(data)
+    #bet_amounts(data)
+    player_list(data)
 
     return
 
@@ -15,17 +16,15 @@ def file_setup(file):
 
     df = pd.read_csv(file)
 
-    pd.set_option('display.max_rows', None)
+    #pd.set_option('display.max_rows', None)
+
+    #convert 'at' to standard datetime format
+    df['at'] = pd.to_datetime(df['at'])
 
     return df
 
 
 def bet_amounts(df):
-
-    df['at'] = pd.to_datetime(df['at'])
-
-    # Convert the 'at' column to datetime format
-    df['at'] = pd.to_datetime(df['at'])
 
     df['raise_amount'] = df['entry'].str.extract('raises to (\d+\.\d+|\d+)')
 
@@ -51,8 +50,12 @@ def bet_amounts(df):
     return
 
 
-def player_list():
+def player_list(df):
     """extracts player names"""
+
+    df['player'] = df['entry'].str.extract(r'"([^"]+ @ [^"]+)"')
+
+    print(df)
     return
 
 if __name__ == "__main__": main()
